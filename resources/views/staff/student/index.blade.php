@@ -3,32 +3,36 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Students</div>
 
                 <div class="panel-body">
-                    <a class="btn btn-primary pull-right" href="{{ route('staff.student.create') }}">Add Student</a>
+                    <a class="btn btn-primary pull-right" href="{{ route('staff.student.create') }}">Tambah Siswa</a>
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Register No.</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>DOB</th>
-                                <th>Department</th>
+                                <th>NIS</th>
+                                <th>Email</th>
+                                <th>Nama Depan</th>
+                                <th>Nama Belakang</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Rayon</th>
+                                <th>Rombel</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($Users as $Index => $User)
                             <tr>
                                 <td>{{ $Index + 1 }}</td>
+                                <td>{{ $User->nis }}</td>
                                 <td>{{ $User->email }}</td>
                                 <td>{{ $User->first_name }}</td>
                                 <td>{{ $User->last_name }}</td>
                                 <td>{{ Carbon\Carbon::parse($User->dob)->format('d-m-Y') }}</td>
-                                <td>{{ $User->department->name }}</td>
+                                <td>{{ $User->rayon->name }}</td>
+                                <td>{{ $User->rombel->name }}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -13,8 +13,8 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Attendance</th>
+                                <th>Tanggal</th>
+                                <th>Kehadiran</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                         </tbody>
                         <thead>
                             <tr>
-                                <th>Percentage</th>
+                                <th>Persentasi</th>
                                 <th>{{ Auth::user()->present->count() / Auth::user()->attendance->count() * 100 }}</th>
                             </tr>
                         </thead>

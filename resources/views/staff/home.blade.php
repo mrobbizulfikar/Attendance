@@ -10,32 +10,43 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <h4>Departments</h4>
+                            <h4>Rayon</h4>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="{{ route('staff.department.index') }}">List Departments</a>
+                                    <a href="{{ route('staff.rayon.index') }}">Daftar Rayon</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="{{ route('staff.department.create') }}">Add Department</a>
+                                    <a href="{{ route('staff.rayon.create') }}">Tambah Rayon</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-md-4">
-                            <h4>Students</h4>
+                            <h4>Rombel</h4>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="{{ route('staff.student.index') }}">List Students</a>
+                                    <a href="{{ route('staff.rombel.index') }}">Daftar Rombel</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="{{ route('staff.student.create') }}">Add Student</a>
+                                    <a href="{{ route('staff.rombel.create') }}">Tambah Rombel</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-md-4">
-                            <h4>Attendance</h4>
+                            <h4>Siswa</h4>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="{{ route('staff.attendance.create') }}">Update Attendance</a>
+                                    <a href="{{ route('staff.student.index') }}">Daftar Siswa</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{{ route('staff.student.create') }}">Tambah Siswa</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Kehadiran</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="{{ route('staff.attendance.create') }}">Perbarui Kehadiran</a>
                                 </li>
                             </ul>
                         </div>

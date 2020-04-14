@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class Rayon extends Model
 {
     /**
      * The attributes that are mass assignable.

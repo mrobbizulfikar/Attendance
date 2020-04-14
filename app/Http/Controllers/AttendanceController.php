@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Department;
+use Carbon\Carbon;
 
-class DepartmentResource extends Controller
+use App\User;
+use App\Attendance;
+use App\Rayon;
+use App\Rombel;
+
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +20,7 @@ class DepartmentResource extends Controller
      */
     public function index()
     {
-        $Departments = Department::all();
-        return view('staff.department.index', compact('Departments'));
+        //
     }
 
     /**
@@ -26,7 +30,10 @@ class DepartmentResource extends Controller
      */
     public function create()
     {
-        return view('staff.department.create');
+        $Users = User::all();
+        $Rayons = Rayon::all();
+        $Rombels = Rombel::all();
+        return view('staff.attendance.create', compact('Users', 'Rayons', 'Rombels'));
     }
 
     /**
@@ -38,13 +45,27 @@ class DepartmentResource extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'name' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
-            ]);
+            'date' => 'required|date',
+        ]);
 
-        Department::create($request->all());
+        $Attendance = [];
 
-        return redirect()->route('staff.department.index');
+        $Users = $request->except('_token', 'date','rombel_id', 'batch', 'datatable_length');
+
+        foreach ($Users as $ID => $Status) {
+            $Attendance[] = [
+                'user_id' => $ID,
+                'rombel_id' => $request->rombel_id,
+                'date' => Carbon::parse($request->date),
+                'attendance' => $Status,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ];
+        }
+
+        Attendance::insert($Attendance);
+
+        return redirect()->route('staff.attendance.create');
     }
 
     /**

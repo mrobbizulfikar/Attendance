@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Department</div>
+                <div class="panel-heading">Tambah Rayon</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('staff.department.store') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('staff.rayon.store') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Nama Rayon</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">Description</label>
+                            <label for="description" class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
                                 <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" autofocus>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttendancesTable extends Migration
+class CreateRayonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('rayons', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('rombel_id');
-            $table->integer('user_id');
-            $table->datetime('date');
-            $table->boolean('attendance');
+            $table->string('name');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('rayons');
     }
 }

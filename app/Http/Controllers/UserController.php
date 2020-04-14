@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\User;
-use App\Department;
+use App\Rayon;
+use App\Rombel;
 
-class UserResource extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +21,12 @@ class UserResource extends Controller
     {
         $Users = new User;        
 
-        if($request->has('department_id')) {
-            $Users = $Users->where('department_id', $request->department_id);
+        if($request->has('rayon_id')) {
+            $Users = $Users->where('rayon_id', $request->rayon_id);
+        }
+        
+        if($request->has('rombel_id')) {
+            $Users = $Users->where('rombel_id', $request->rombel_id);
         }
 
         if($request->has('batch')) {
@@ -44,8 +49,9 @@ class UserResource extends Controller
      */
     public function create()
     {
-        $Departments = Department::all();
-        return view('staff.student.create', compact('Departments'));
+        $Rayons = Rayon::all();
+        $Rombels = Rombel::all();
+        return view('staff.student.create', compact('Rayons','Rombels'));
     }
 
     /**
@@ -61,7 +67,8 @@ class UserResource extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|max:255|unique:users',
             'dob' => 'required|date',
-            'department_id' => 'required|exists:departments,id',
+            'rayon_id' => 'required|exists:rayons,id',
+            'rombel_id' => 'required|exists:rombels,id',
         ]);
 
         User::create([
@@ -69,9 +76,11 @@ class UserResource extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'dob' => Carbon::parse($request->dob),
-            'department_id' => $request->department_id,
+            'rayon_id' => $request->rayon_id,
+            'rombel_id' => $request->rombel_id,
             'password' => bcrypt($request->dob),
             'batch' => $request->batch,
+            'nis' => $request->nis,
         ]);
 
         return redirect()->route('staff.student.index');

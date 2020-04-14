@@ -35,7 +35,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/staff') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Staff
+                    {{ config('app.name', 'Absensi') }}: Staff/Guru
                 </a>
             </div>
 

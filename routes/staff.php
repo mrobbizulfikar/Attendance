@@ -3,6 +3,7 @@
 Route::get('/', 'StaffController@index');
 Route::get('home', 'StaffController@index');
 
-Route::resource('student', 'UserResource');
-Route::resource('department', 'DepartmentResource');
-Route::resource('attendance', 'AttendanceResource');
+Route::resource('student', 'UserController');
+Route::resource('rayon', 'RayonController');
+Route::resource('rombel', 'RombelController');
+Route::resource('attendance', 'AttendanceController');

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'dob', 'department_id', 'batch'
+        'first_name', 'last_name', 'email', 'password', 'dob', 'rayon_id', 'rombel_id','batch','nis'
     ];
 
     /**
@@ -28,11 +28,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the department associated with the user.
+     * Get the rayon associated with the user.
      */
-    public function department()
+    public function rayon()
     {
-        return $this->belongsTo('App\Department');
+        return $this->belongsTo('App\Rayon');
+    }
+    
+    /**
+     * Get the rombel associated with the user.
+     */
+    public function rombel()
+    {
+        return $this->belongsTo('App\Rombel');
     }
 
     /**

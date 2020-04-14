@@ -6,32 +6,32 @@
         <div class="col-md-8 col-md-offset-2">
             
             <div class="panel panel-default">
-                <div class="panel-heading">Attendance</div>
+                <div class="panel-heading">Absensi</div>
                 <div class="panel-body">
                     
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('staff.attendance.store') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('department_id') ? ' has-error' : '' }}">
-                            <label for="department_id" class="col-md-4 control-label">Department</label>
+                        <div class="form-group{{ $errors->has('rombel_id') ? ' has-error' : '' }}">
+                            <label for="rombel_id" class="col-md-4 control-label">Rombel</label>
 
                             <div class="col-md-6">
-                                <select id="department_id" class="form-control" name="department_id" onchange="filter(this)" required>
-                                    @foreach($Departments as $Department)
-                                    <option value="{{ $Department->id }}">{{ $Department->name }}</option>
+                                <select id="rombel_id" class="form-control" name="rombel_id" onchange="filter(this)" required>
+                                    @foreach($Rombels as $Rombel)
+                                    <option value="{{ $Rombel->id }}">{{ $Rombel->name }}</option>
                                     @endforeach
                                 </select>
 
-                                @if ($errors->has('department_id'))
+                                @if ($errors->has('rombel_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('department_id') }}</strong>
+                                        <strong>{{ $errors->first('rombel_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
-                            <label for="batch" class="col-md-4 control-label">Batch / Year of Join</label>
+                            <label for="batch" class="col-md-4 control-label">Tahun Gabung (Angkatan)</label>
 
                             <div class="col-md-6">
                                 <input id="batch" type="text" class="form-control" name="batch" value="{{ old('batch') }}" data-toggle="datepicker-year" onchange="filter(this)" required>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                            <label for="date" class="col-md-4 control-label">Date</label>
+                            <label for="date" class="col-md-4 control-label">Tanggal Absen</label>
 
                             <div class="col-md-6">
                                 <input id="date" type="text" class="form-control" name="date" value="{{ old('date') }}" data-toggle="datepicker" required>
@@ -62,9 +62,10 @@
                         <table class="table table-hover" id="datatable">
                             <thead>
                                 <tr>
-                                    <th>Register No.</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>NIS</th>
+                                    <th>Email</th>
+                                    <th>Nama Depan</th>
+                                    <th>Nama Belakang</th>
                                     <th>Attendance</th>
                                 </tr>
                             </thead>
@@ -96,22 +97,23 @@ $(document).ready(function() {
     window.datatable = $('#datatable').DataTable( {
         data: [],
         columns: [
-            { title: "Register No." },
-            { title: "First Name" },
-            { title: "Last Name" },
+            { title: "NIS" },
+            { title: "Email" },
+            { title: "Nama Depan" },
+            { title: "Nama Belakang" },
             { title: "Attendance" }
         ]
     });
 
     var filter_data = {
-        department_id: {{ count($Departments) ? $Departments[0]->id : 'null' }},
+        rombel_id: {{ count($Rombels) ? $Rombels[0]->id : 'null' }},
         batch: null
     }
 
     window.filter = function filter(input) {
         datatable.clear().draw();
         filter_data[input.name] = input.value;
-        if(filter_data.department_id != null && filter_data.batch != null) {
+        if(filter_data.rombel_id != null && filter_data.batch != null) {
             load_data()
         }
     }
@@ -136,6 +138,7 @@ $(document).ready(function() {
         $.each(students, function(index, value) {
             // console.log(compiled);
             datatable.row.add([
+                value.nis,
                 value.email,
                 value.first_name,
                 value.last_name,
